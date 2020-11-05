@@ -5,6 +5,11 @@
 npm install
 ```
 
+## Run in electron
+```
+npm run electron:serve
+```
+
 ### Compiles and hot-reloads for development
 ```
 npm run serve
