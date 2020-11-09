@@ -45,7 +45,7 @@
 
 <script>
 import { Row, Col, InputNumber, Button } from "ant-design-vue";
-import MMS from "../services/queues/me1.js";
+import MMS from "../services/queues/mms.js";
 
 export default {
   name: "MMSForm",
