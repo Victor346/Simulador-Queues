@@ -45,7 +45,7 @@
 
 <script>
 import { Row, Col, InputNumber, Button } from "ant-design-vue";
-import MMS from "../services/queues/mms.js";
+import MMS from "../services/queues/me1.js";
 
 export default {
   name: "MMSForm",
@@ -66,12 +66,15 @@ export default {
     handleSubmit() {
       let queueModel = new MMS(this.lambda, this.mu, this.s, this.cw, this.cs);
       console.log("p0 ", queueModel.p0());
-      console.log("p0 ", queueModel.pn(0));
+      for(let i=1; i<8; i++) {
+        console.log("p"+i, queueModel.pn(i));
+      }
       console.log("ro", queueModel.rho());
       console.log("l ", queueModel.l());
       console.log("lq ", queueModel.lq());
       console.log("w ", queueModel.w());
       console.log("wq ", queueModel.wq());
+      console.log("ct", queueModel.ct());
     }
   }
 };

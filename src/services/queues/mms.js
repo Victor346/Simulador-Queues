@@ -23,7 +23,7 @@ class MMs extends Queue {
   pn(n) {
     let divisor = Math.pow(this.lambda / this.mu, n);
     let dividend =
-      n <= this.s ? factorial(n) : factorial(n) * Math.pow(this.s, n - this.s);
+      (n <= this.s) ? factorial(n) : (factorial(this.s) * Math.pow(this.s, n - this.s));
     let total = (divisor / dividend) * this.p0();
     return total;
   }

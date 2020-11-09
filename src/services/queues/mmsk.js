@@ -8,7 +8,7 @@ class MMsK extends Queue {
 
     p0() {
         let summation1 = 0;
-        for(let i=0; i<this.s; i++) {
+        for(let i=0; i<=this.s; i++) {
             let divisor = Math.pow(this.lambda / this.mu, i);
             let dividend = factorial(i);
             summation1 += (divisor / dividend);
@@ -16,7 +16,7 @@ class MMsK extends Queue {
 
         let mul = Math.pow(this.lambda / this.mu, this.s) / factorial(this.s);
         let summation2 = 0;
-        for(let i=this.s+1; i<this.k; i++) {
+        for(let i=this.s+1; i<=this.k; i++) {
             summation2 += Math.pow(this.rho(), i - this.s)
         }
 
@@ -27,7 +27,7 @@ class MMsK extends Queue {
 
     pn(n) {
         let divisor = Math.pow(this.lambda / this.mu, n);
-        let dividend = (n <= this.s) ? factorial(n) : factorial(n) * Math.pow(this.s, n-this.s);
+        let dividend = (n <= this.s) ? factorial(n) : factorial(this.s) * Math.pow(this.s, n-this.s);
         let total = divisor / dividend * this.p0();
         return total;
     }
@@ -38,7 +38,7 @@ class MMsK extends Queue {
 
     lq() {
         let divisor = this.p0() * Math.pow(this.lambda / this.mu, this.s) * this.rho();
-        let dividend = factorial(this.s) * Math.pow((1 - this.rho), 2);
+        let dividend = factorial(this.s) * Math.pow((1 - this.rho()), 2);
         let sub = this.k - this.s;
         let r_pow = Math.pow(this.rho(), sub);
         let mul = 1 - r_pow - sub * r_pow * (1 - this.rho());

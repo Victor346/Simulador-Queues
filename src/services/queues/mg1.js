@@ -1,8 +1,9 @@
 import Queue from './queue';
 
 class MG1 extends Queue {
-    constructor (lambda, mu, cw, cs) {
+    constructor (lambda, mu, std, cw, cs) {
         super(lambda, mu, 1, Math.max, cw, cs);
+        this.std = std;
     }
 
     p0() {
@@ -18,8 +19,9 @@ class MG1 extends Queue {
     }
 
     lq() {
+        let divisor = Math.pow(this.lambda, 2) * Math.pow(this.std, 2) + Math.pow(this.rho(), 2);
         let dividend = 2 * (1 - this.rho());
-        let total = Math.pow(this.rho(), 2) / dividend;
+        let total = divisor / dividend;
         return total;
     }
 

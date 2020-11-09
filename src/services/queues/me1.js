@@ -2,9 +2,10 @@ import Queue from './queue';
 import { factorial } from '../util/math_operations';
 
 class ME1 extends Queue {
-    constructor (lambda, mu, std, cw, cs) {
+    constructor (lambda, mu, ek, std, cw, cs) {
         super(lambda, mu, 1, Math.max, cw, cs);
         this.std = std;
+        this.ek = ek;
     }
 
     p0() {
@@ -20,7 +21,7 @@ class ME1 extends Queue {
     }
 
     lq() {
-        let mul1 = (1 + this.k) / (2 * this.k);
+        let mul1 = (1 + this.ek) / (2 * this.ek);
         let mul2 = Math.pow(this.lambda, 2) / (this.mu * (this.mu - this.lambda)); 
         let total = mul1 * mul2;
         return total;
