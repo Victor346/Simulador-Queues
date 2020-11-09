@@ -1,5 +1,9 @@
 function factorial(n) {
-    return n ? n * factorial(n - 1) : 1; 
+  let acc = 1;
+  for (let i = n; i > 0; i--) {
+    acc *= i;
+  }
+  return acc;
 }
 
 export { factorial };

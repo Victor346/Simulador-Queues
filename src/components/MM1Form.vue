@@ -4,7 +4,7 @@
       <Col :flex="1">
         <Row type="flex">
           <Col :flex="1">
-            <label>Lambda</label>
+            <label>&lambda;</label>
           </Col>
           <Col :flex="1">
             <InputNumber placeholder="Lambda" :step="1" :min="0.00001" />
@@ -14,7 +14,7 @@
       <Col :flex="1">
         <Row type="flex">
           <Col :flex="1">
-            <label>Miu</label>
+            <label>	&mu;</label>
           </Col>
           <Col :flex="1">
             <InputNumber placeholder="Miu" step="1" :min="0.00001" />

@@ -4,20 +4,20 @@
       <Col :flex="1">
         <Row type="flex">
           <Col :flex="1">
-            <label>Lambda</label>
+            <label>&lambda;</label>
           </Col>
           <Col :flex="1">
-            <InputNumber placeholder="Lambda" :step="1" :min="0.00001" />
+            <InputNumber v-model="lambda" placeholder="Lambda" :min="0.000000000000000000001" />
           </Col>
         </Row>
       </Col>
       <Col :flex="1">
         <Row type="flex">
           <Col :flex="1">
-            <label>Miu</label>
+            <label>	&mu;</label>
           </Col>
           <Col :flex="1">
-            <InputNumber placeholder="Miu" :step="1" :min="0.00001" />
+            <InputNumber placeholder="Mu" v-model="mu" :min="0.000000000000000000001" />
           </Col>
         </Row>
       </Col>
@@ -27,17 +27,17 @@
             <label>Servidores</label>
           </Col>
           <Col :flex="1">
-            <InputNumber placeholder="S" :precision="0" :step="1" :min="1" />
+            <InputNumber placeholder="S" v-model="s" :precision="0" :step="1" :min="1" />
           </Col>
         </Row>
       </Col>
       <Col :flex="2">
-        <Button type="primary">Calcular</Button>
+        <Button type="primary" @click="handleSubmit">Calcular</Button>
       </Col>
     </Row>
     <Row type="flex" :gutter="[0, 48]">
       <Col :flex="1">
-        <h2>TODO: resultados</h2>
+        <h2></h2>
       </Col>
     </Row>
   </div>
@@ -45,10 +45,35 @@
 
 <script>
 import { Row, Col, InputNumber, Button } from "ant-design-vue";
+import MMS from "../services/queues/mms.js";
 
 export default {
   name: "MMSForm",
-  components: { Row, Col, InputNumber, Button }
+  components: { Row, Col, InputNumber, Button },
+  data() {
+    return {
+      mu: 80,
+      lambda: 120,
+      s: 3,
+      cw: 48,
+      cs: 20
+    };
+  },
+  mounted() {
+    this.handleSubmit();
+  },
+  methods: {
+    handleSubmit() {
+      let queueModel = new MMS(this.lambda, this.mu, this.s, this.cw, this.cs);
+      console.log("p0 ", queueModel.p0());
+      console.log("p0 ", queueModel.pn(0));
+      console.log("ro", queueModel.rho());
+      console.log("l ", queueModel.l());
+      console.log("lq ", queueModel.lq());
+      console.log("w ", queueModel.w());
+      console.log("wq ", queueModel.wq());
+    }
+  }
 };
 </script>
 

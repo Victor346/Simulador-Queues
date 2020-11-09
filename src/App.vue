@@ -2,11 +2,6 @@
   <div id="app">
     <Col :span="4">
       <Menu id="sidemenu" mode="inline" :inline-collapsed="false">
-        <MenuItem key="1">
-          <router-link to="/">
-            <h2>Home</h2>
-          </router-link>
-        </MenuItem>
         <MenuItem key="2">
           <router-link to="/mm1">
             <h2>M/M/1</h2>
