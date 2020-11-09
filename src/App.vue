@@ -34,7 +34,7 @@
         </MenuItem>
       </Menu>
     </Col>
-    <Col :span="20">
+    <Col id="view-container" :span="20">
       <router-view />
     </Col>
   </div>
@@ -51,6 +51,10 @@ export default {
 </script>
 
 <style>
+label {
+  font-size: 20px;
+}
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -61,5 +65,9 @@ export default {
 
 #sidemenu {
   height: 100vh;
+}
+
+#view-container {
+  padding: 16px;
 }
 </style>

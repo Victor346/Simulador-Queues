@@ -1,10 +1,19 @@
 <template>
-  <h1>M/E<sub>k</sub>/S Works</h1>
+  <div>
+    <Row>
+      <h1>Modelo M/E<sub>k</sub>/s</h1>
+    </Row>
+    <MEkSForm />
+  </div>
 </template>
 
 <script>
+import { Row } from "ant-design-vue";
+import MEkSForm from "@/components/MEkSForm.vue";
+
 export default {
-  name: "MEkS"
+  name: "MEkS",
+  components: { Row, MEkSForm }
 };
 </script>
 
