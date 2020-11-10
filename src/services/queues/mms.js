@@ -1,5 +1,5 @@
 import Queue from "./queue";
-import {factorial} from "../util/math_operations";
+import { factorial } from "../util/math_operations";
 
 class MMs extends Queue {
   constructor(lambda, mu, s, cw, cs) {
@@ -23,9 +23,10 @@ class MMs extends Queue {
   pn(n) {
     let divisor = Math.pow(this.lambda / this.mu, n);
     let dividend =
-      (n <= this.s) ? factorial(n) : (factorial(this.s) * Math.pow(this.s, n - this.s));
-    let total = (divisor / dividend) * this.p0();
-    return total;
+      n <= this.s
+        ? factorial(n)
+        : factorial(this.s) * Math.pow(this.s, n - this.s);
+    return (divisor / dividend) * this.p0();
   }
 
   l() {

@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Col :span="4">
+    <Col :span="3">
       <Menu id="sidemenu" mode="inline" :inline-collapsed="false">
         <MenuItem key="2">
           <router-link to="/mm1">
@@ -47,7 +47,7 @@ export default {
 
 <style>
 label {
-  font-size: 20px;
+  font-size: 22px;
 }
 
 #app {
@@ -59,7 +59,7 @@ label {
 }
 
 #sidemenu {
-  height: 100vh;
+  height: 90vh;
 }
 
 #view-container {
