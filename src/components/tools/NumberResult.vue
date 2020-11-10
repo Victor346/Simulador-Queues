@@ -2,7 +2,6 @@
   <Statistic
     :value="n"
     :precision="precision"
-    :formatter="({ _h, value }) => value"
     :valueStyle="{ 'font-size': '20px' }"
     :style="{ 'margin-bottom': '8px' }"
   />

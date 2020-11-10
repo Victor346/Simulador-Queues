@@ -34,7 +34,7 @@
             <InputNumber
               placeholder="S"
               v-model="s"
-              :precision="0"
+              :precision="4"
               :step="1"
               :min="1"
             />
@@ -53,25 +53,25 @@
     <Row :gutter="[0, 12]">
       <Col :span="8">
         <label><b>&rho;</b></label>
-        <NumberResult :n="rho" :precision="0" />
+        <NumberResult :n="rho" :precision="4" />
         <label>
           <b>P<sub>0</sub></b>
         </label>
-        <NumberResult :n="p0" :precision="0" />
+        <NumberResult :n="p0" :precision="4" />
       </Col>
       <Col :span="8">
         <label>
           <b>L<sub>q</sub></b>
         </label>
-        <NumberResult :n="lq" :precision="0" />
+        <NumberResult :n="lq" :precision="4" />
         <label><b>L</b></label>
-        <NumberResult :n="l" :precision="0" />
+        <NumberResult :n="l" :precision="4" />
         <label>
           <b>W<sub>q</sub></b>
         </label>
-        <NumberResult :n="wq" :precision="0" />
+        <NumberResult :n="wq" :precision="4" />
         <label><b>W</b></label>
-        <NumberResult :n="w" :precision="0" />
+        <NumberResult :n="w" :precision="4" />
       </Col>
       <Col :span="8">
         <PnTable :data="pn" :page-size="4" />
@@ -152,11 +152,11 @@ export default {
   },
   data() {
     return {
-      mu: 80,
-      lambda: 120,
-      s: 3,
-      cw: 48,
-      cs: 20,
+      mu: 0,
+      lambda: 0,
+      s: 0,
+      cw: 0,
+      cs: 0,
       rho: 0,
       p0: 0,
       lq: 0,
@@ -180,6 +180,7 @@ export default {
       for (let i = 1; i <= 8; i++) {
         this.pn.push({
           n: i,
+          key: i,
           pn: queueModel.pn(i)
         });
       }
