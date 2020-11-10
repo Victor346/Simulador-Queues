@@ -7,17 +7,21 @@
             <label>&lambda;</label>
           </Col>
           <Col :flex="1">
-            <InputNumber v-model="lambda" placeholder="Lambda" :min="0.000000000000000000001" />
+            <InputNumber
+              v-model="lambda"
+              placeholder="Lambda"
+              :min="0.000001"
+            />
           </Col>
         </Row>
       </Col>
       <Col :flex="1">
         <Row type="flex">
           <Col :flex="1">
-            <label>	&mu;</label>
+            <label>&mu;</label>
           </Col>
           <Col :flex="1">
-            <InputNumber placeholder="Mu" v-model="mu" :min="0.000000000000000000001" />
+            <InputNumber placeholder="Mu" v-model="mu" :min="0.000001" />
           </Col>
         </Row>
       </Col>
@@ -27,7 +31,13 @@
             <label>Servidores</label>
           </Col>
           <Col :flex="1">
-            <InputNumber placeholder="S" v-model="s" :precision="0" :step="1" :min="1" />
+            <InputNumber
+              placeholder="S"
+              v-model="s"
+              :precision="0"
+              :step="1"
+              :min="1"
+            />
           </Col>
         </Row>
       </Col>
@@ -35,46 +45,145 @@
         <Button type="primary" @click="handleSubmit">Calcular</Button>
       </Col>
     </Row>
-    <Row type="flex" :gutter="[0, 48]">
+    <Row type="flex" :gutter="[0, 24]">
       <Col :flex="1">
-        <h2></h2>
+        <h2>Resultados</h2>
+      </Col>
+    </Row>
+    <Row :gutter="[0, 12]">
+      <Col :span="8">
+        <label><b>&rho;</b></label>
+        <NumberResult :n="rho" :precision="0" />
+        <label>
+          <b>P<sub>0</sub></b>
+        </label>
+        <NumberResult :n="p0" :precision="0" />
+      </Col>
+      <Col :span="8">
+        <label>
+          <b>L<sub>q</sub></b>
+        </label>
+        <NumberResult :n="lq" :precision="0" />
+        <label><b>L</b></label>
+        <NumberResult :n="l" :precision="0" />
+        <label>
+          <b>W<sub>q</sub></b>
+        </label>
+        <NumberResult :n="wq" :precision="0" />
+        <label><b>W</b></label>
+        <NumberResult :n="w" :precision="0" />
+      </Col>
+      <Col :span="8">
+        <PnTable :data="pn" :page-size="4" />
+      </Col>
+    </Row>
+    <Row :gutter="[0, 12]">
+      <Col>
+        <h2>Costos</h2>
+      </Col>
+    </Row>
+    <Row :gutter="[0, 12]">
+      <Col :span="8">
+        <Row>
+          <Col :span="4">
+            <label>C<sub>w</sub></label>
+          </Col>
+          <Col :span="16">
+            <InputNumber
+              v-model="cw"
+              placeholder="Cw"
+              :precision="2"
+              :min="0"
+            />
+          </Col>
+        </Row>
+      </Col>
+      <Col :span="8">
+        <Row>
+          <Col :span="4">
+            <label>C<sub>s</sub></label>
+          </Col>
+          <Col :span="16">
+            <InputNumber
+              placeholder="Cs"
+              v-model="cs"
+              :min="0.01"
+              :precision="2"
+            />
+          </Col>
+        </Row>
+      </Col>
+      <Col :span="8">
+        <Row>
+          <Col :span="8">
+            <label>
+              Costo total ($)
+            </label>
+          </Col>
+          <Col :span="8">
+            <Statistic
+              :value="ct"
+              :precision="2"
+              :valueStyle="{ 'font-size': '24px' }"
+            />
+          </Col>
+        </Row>
       </Col>
     </Row>
   </div>
 </template>
 
 <script>
-import { Row, Col, InputNumber, Button } from "ant-design-vue";
+import { Row, Col, InputNumber, Button, Statistic } from "ant-design-vue";
+import NumberResult from "@/components/tools/NumberResult.vue";
+import PnTable from "@/components/tools/PnTable.vue";
 import MMS from "../services/queues/mms.js";
 
 export default {
   name: "MMSForm",
-  components: { Row, Col, InputNumber, Button },
+  components: {
+    Row,
+    Col,
+    InputNumber,
+    Button,
+    Statistic,
+    NumberResult,
+    PnTable
+  },
   data() {
     return {
       mu: 80,
       lambda: 120,
       s: 3,
       cw: 48,
-      cs: 20
+      cs: 20,
+      rho: 0,
+      p0: 0,
+      lq: 0,
+      l: 0,
+      wq: 0,
+      w: 0,
+      pn: [],
+      ct: 0
     };
-  },
-  mounted() {
-    this.handleSubmit();
   },
   methods: {
     handleSubmit() {
       let queueModel = new MMS(this.lambda, this.mu, this.s, this.cw, this.cs);
-      console.log("p0 ", queueModel.p0());
-      for(let i=1; i<8; i++) {
-        console.log("p"+i, queueModel.pn(i));
+      this.rho = queueModel.rho();
+      this.p0 = queueModel.p0();
+      this.lq = queueModel.lq();
+      this.l = queueModel.l();
+      this.wq = queueModel.wq();
+      this.w = queueModel.w();
+      this.pn = [];
+      for (let i = 1; i <= 8; i++) {
+        this.pn.push({
+          n: i,
+          pn: queueModel.pn(i)
+        });
       }
-      console.log("ro", queueModel.rho());
-      console.log("l ", queueModel.l());
-      console.log("lq ", queueModel.lq());
-      console.log("w ", queueModel.w());
-      console.log("wq ", queueModel.wq());
-      console.log("ct", queueModel.ct());
+      this.ct = queueModel.ct();
     }
   }
 };
