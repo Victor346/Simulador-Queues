@@ -85,13 +85,13 @@
         <PnTable :data="pn" :page-size="4" />
       </Col>
     </Row>
-    <Row :gutter="[0, 12]">
+    <Row :gutter="[0, 24]">
       <Col>
-        <h2>Costos</h2>
+        <h2><b>Costos</b></h2>
       </Col>
     </Row>
     <Row :gutter="[0, 12]">
-      <Col :span="8">
+      <Col :span="6">
         <Row>
           <Col :span="4">
             <label>C<sub>w</sub></label>
@@ -106,7 +106,7 @@
           </Col>
         </Row>
       </Col>
-      <Col :span="8">
+      <Col :span="6">
         <Row>
           <Col :span="4">
             <label>C<sub>s</sub></label>
@@ -121,7 +121,7 @@
           </Col>
         </Row>
       </Col>
-      <Col :span="8">
+      <Col :span="6">
         <Row>
           <Col :span="8">
             <label>
@@ -131,6 +131,22 @@
           <Col :span="8">
             <Statistic
               :value="ct"
+              :precision="2"
+              :valueStyle="{ 'font-size': '24px' }"
+            />
+          </Col>
+        </Row>
+      </Col>
+      <Col :span="6">
+        <Row>
+          <Col :span="8">
+            <label>
+              Cts
+            </label>
+          </Col>
+          <Col :span="8">
+            <Statistic
+              :value="cts"
               :precision="2"
               :valueStyle="{ 'font-size': '24px' }"
             />
@@ -173,7 +189,8 @@ export default {
       wq: 0,
       w: 0,
       pn: [],
-      ct: 0
+      ct: 0,
+      cts: 0
     };
   },
   methods: {
@@ -193,7 +210,7 @@ export default {
       this.wq = queueModel.wq();
       this.w = queueModel.w();
       this.pn = [];
-      for (let i = 1; i <= 8; i++) {
+      for (let i = 1; i <= 10; i++) {
         this.pn.push({
           n: i,
           key: i,
@@ -201,6 +218,7 @@ export default {
         });
       }
       this.ct = queueModel.ct();
+      this.cts = queueModel.cts();
     }
   }
 };

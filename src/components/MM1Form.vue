@@ -7,7 +7,12 @@
             <label>&lambda;</label>
           </Col>
           <Col :flex="1">
-            <InputNumber v-model="lambda" placeholder="Lambda" :step="1" :min="0.00001" />
+            <InputNumber
+              v-model="lambda"
+              placeholder="Lambda"
+              :step="1"
+              :min="0.00001"
+            />
           </Col>
         </Row>
       </Col>
@@ -17,7 +22,12 @@
             <label>&mu;</label>
           </Col>
           <Col :flex="1">
-            <InputNumber v-model="mu" placeholder="Miu" step="1" :min="0.00001" />
+            <InputNumber
+              v-model="mu"
+              placeholder="Miu"
+              step="1"
+              :min="0.00001"
+            />
           </Col>
         </Row>
       </Col>
@@ -57,13 +67,13 @@
         <PnTable :data="pn" :page-size="4" />
       </Col>
     </Row>
-    <Row :gutter="[0, 12]">
+    <Row :gutter="[0, 24]">
       <Col>
-        <h2>Costos</h2>
+        <h2><b>Costos</b></h2>
       </Col>
     </Row>
     <Row :gutter="[0, 12]">
-      <Col :span="8">
+      <Col :span="6">
         <Row>
           <Col :span="4">
             <label>C<sub>w</sub></label>
@@ -78,7 +88,7 @@
           </Col>
         </Row>
       </Col>
-      <Col :span="8">
+      <Col :span="6">
         <Row>
           <Col :span="4">
             <label>C<sub>s</sub></label>
@@ -93,7 +103,7 @@
           </Col>
         </Row>
       </Col>
-      <Col :span="8">
+      <Col :span="6">
         <Row>
           <Col :span="8">
             <label>
@@ -103,6 +113,22 @@
           <Col :span="8">
             <Statistic
               :value="ct"
+              :precision="2"
+              :valueStyle="{ 'font-size': '24px' }"
+            />
+          </Col>
+        </Row>
+      </Col>
+      <Col :span="6">
+        <Row>
+          <Col :span="8">
+            <label>
+              Cts
+            </label>
+          </Col>
+          <Col :span="8">
+            <Statistic
+              :value="cts"
               :precision="2"
               :valueStyle="{ 'font-size': '24px' }"
             />
@@ -143,7 +169,8 @@ export default {
       wq: 0,
       w: 0,
       pn: [],
-      ct: 0
+      ct: 0,
+      cts: 0
     };
   },
   methods: {
@@ -164,6 +191,7 @@ export default {
         });
       }
       this.ct = qModel.ct();
+      this.cts = qModel.cts();
     }
   }
 };

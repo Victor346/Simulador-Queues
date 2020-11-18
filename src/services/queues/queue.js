@@ -8,6 +8,8 @@ class Queue {
     this.cs = cs;
   }
 
+  l() {}
+
   lq() {}
 
   rho() {
@@ -16,6 +18,10 @@ class Queue {
 
   ct() {
     return this.lq() * this.cw + this.s * this.cs;
+  }
+
+  cts() {
+    return this.l() * this.cw + this.s * this.cs;
   }
 }
 
