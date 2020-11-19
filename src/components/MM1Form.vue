@@ -32,7 +32,9 @@
         </Row>
       </Col>
       <Col :flex="1">
-        <Button @click="handleSubmit" type="primary">Calcular</Button>
+        <Button :disabled="calculateRho()" @click="handleSubmit" type="primary"
+          >Calcular</Button
+        >
       </Col>
     </Row>
     <Row type="flex" :gutter="[0, 48]">
@@ -192,6 +194,11 @@ export default {
       }
       this.ct = qModel.ct();
       this.cts = qModel.cts();
+    },
+    calculateRho() {
+      let qModel = new MM1(this.lambda, this.mu, this.cw, this.cs);
+      this.rho = qModel.rho();
+      return this.rho > 1;
     }
   }
 };

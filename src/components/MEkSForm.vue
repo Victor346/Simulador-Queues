@@ -50,7 +50,9 @@
         </Row>
       </Col>
       <Col :flex="2">
-        <Button type="primary" @click="handleSubmit">Calcular</Button>
+        <Button type="primary" :disabled="calculateRho()" @click="handleSubmit"
+          >Calcular</Button
+        >
       </Col>
     </Row>
     <Row type="flex" :gutter="[0, 24]">
@@ -162,6 +164,7 @@ import { Row, Col, InputNumber, Button, Statistic } from "ant-design-vue";
 import NumberResult from "@/components/tools/NumberResult.vue";
 import PnTable from "@/components/tools/PnTable.vue";
 import ME1 from "../services/queues/me1.js";
+import MM1 from '@/services/queues/mm1'
 
 export default {
   name: "MEKSorm",
@@ -219,6 +222,11 @@ export default {
       }
       this.ct = queueModel.ct();
       this.cts = queueModel.cts();
+    },
+    calculateRho() {
+      let qModel = new MM1(this.lambda, this.mu, this.cw, this.cs);
+      this.rho = qModel.rho();
+      return this.rho > 1;
     }
   }
 };
